@@ -1,0 +1,72 @@
+github:
+  prebuilds:
+    # enable for the default branch (defaults to true)
+    master: true
+    # enable for all branches in this repo (defaults to false)
+    branches: true
+    # enable for pull requests coming from this repo (defaults to true)
+    pullRequests: true
+    # add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
+    addComment: true
+    # configure whether Gitpod registers itself as a status check to pull requests
+    addCheck: false
+
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Generate cluster id
+    command: /workspace/learn-kafka-kraft/kraft/scripts/create_cluster_id.sh
+
+  - name: Pre-load docker image to workspace 
+    command: docker pull confluentinc/cp-enterprise-control-center:7.1.1
+
+  - name: Pre-load docker image to workspace 
+    command: docker pull confluentinc/cp-server-connect:7.1.1
+
+  - name: Pre-load docker image to workspace 
+    command: docker pull mysql:8.0
+
+  - name: Pre-load docker image to workspace 
+    command: docker pull docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+
+  - name: Pre-load docker image to workspace 
+    command: docker pull docker.elastic.co/kibana/kibana:7.17.0
+
+  - name: Pre-load docker image to workspace 
+    command: docker pull neo4j:4.4.4
+
+  - name: Pre-load docker image to workspace 
+    command: docker pull edenhill/kcat:1.7.1
+
+  - name: Install docker-compose version 2.4.1 
+    command: sudo curl -SL https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
+# ports:
+    
+  # Confluent Server (broker)
+  # - port: 9092
+  #   onOpen: ignore
+    
+  # Confluent Server (REST)
+  # - port: 8090
+  #   onOpen: ignore
+    
+  # Schema Registry
+  # - port: 8081
+  #   onOpen: ignore
+  # - port: 8082
+  #   onOpen: ignore
+    
+  # Kafka Connect
+  # - port: 8083
+  #   onOpen: ignore
+    
+  # ksqlDB
+  # - port: 8088
+  #   onOpen: ignore
+    
+  # Confluent Control Center
+  # - port: 9021
+  #   onOpen: open-preview
+  #   visibility: public
